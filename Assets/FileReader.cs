@@ -11,6 +11,11 @@ public class FileReader : MonoBehaviour
     public int x = 0;
     public int y = 0;
 
+    private int maxX = 8;
+    private int maxY = 9;
+    private int minX = 0;
+    private int minY = 0;
+
     void ReadTextFile(string _filePath)
     {
         StreamReader _inpStm = new StreamReader(_filePath);
@@ -39,24 +44,56 @@ public class FileReader : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            x++;
+            x--;
+            if (x < minX)
+            {
+                x = maxX;
+            }
+            if (x > maxX)
+            {
+                x = minX;
+            }
             Calculate();
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            x--;
+            x++;
+            if (x < minX)
+            {
+                x = maxX;
+            }
+            if (x > maxX)
+            {
+                x = minX;
+            }
             Calculate();
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
+            if (y < minY)
+            {
+                y = maxY;
+            }
+            if (y > maxY)
+            {
+                y = minY;
+            }
             y--;
             Calculate();
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
+            if (y < minY)
+            {
+                y = maxY;
+            }
+            if (y > maxY)
+            {
+                y = minY;
+            }
             y++;
             Calculate();
         }
