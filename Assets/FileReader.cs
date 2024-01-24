@@ -7,9 +7,6 @@ public class FileReader : MonoBehaviour
 {
     public string _loadedData;
 
-    
-
-    //public List<string> _textLines = new List<string>();
     public string[] _textLines;
     public char[,] _data = new char[3,3];
     public int x = 0;
@@ -20,39 +17,7 @@ public class FileReader : MonoBehaviour
     public int minX = 0;
     public int minY = 0;
 
-    //void ReadTextFile(string _filePath)
-    //{
-    //    StreamReader _inpStm = new StreamReader(_filePath);
-
-    //    while (!_inpStm.EndOfStream)
-    //    {
-    //        string _inpLn = _inpStm.ReadLine();
-    //        _textLines.Add(_inpLn);
-
-    //    }
-    //    _inpStm.Close();
-    //}
-
-    //void ReadTextFile()
-    //{
-    //    TextAsset textFile = Resources.Load<TextAsset>("file");
-
-    //    if (textFile != null)
-    //    {
-    //        _textLines = textFile.text.Split(new string[] {"\r\n", "\n"}, System.StringSplitOptions.RemoveEmptyEntries);
-
-    //        foreach (string line in _textLines)
-    //        {
-    //            Debug.Log(line);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Debug.LogError("File don't exist");
-    //    }
-
-    //}
-
+    
     void ReadTextFile(string _filePath)
     {
         if (File.Exists(_filePath))
@@ -116,7 +81,6 @@ public class FileReader : MonoBehaviour
             {
                 y = minY;
             }
-            
             Calculate();
         }
 
@@ -135,8 +99,6 @@ public class FileReader : MonoBehaviour
             Calculate();
         }
 
-
-
     }
 
     public void Calculate()
@@ -147,7 +109,6 @@ public class FileReader : MonoBehaviour
         Debug.Log("stroke: " + _textLines[x]);
 
         Debug.Log(_textLines[x].Length);
-
 
         int currentIndexX = x;
         int currentIndexY = y;
@@ -197,5 +158,4 @@ public class FileReader : MonoBehaviour
 
     }
 
-    
 }
