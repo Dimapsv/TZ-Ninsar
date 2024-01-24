@@ -33,35 +33,46 @@ public class FileReader : MonoBehaviour
     //    _inpStm.Close();
     //}
 
-    void ReadTextFile()
+    //void ReadTextFile()
+    //{
+    //    TextAsset textFile = Resources.Load<TextAsset>("file");
+
+    //    if (textFile != null)
+    //    {
+    //        _textLines = textFile.text.Split(new string[] {"\r\n", "\n"}, System.StringSplitOptions.RemoveEmptyEntries);
+
+    //        foreach (string line in _textLines)
+    //        {
+    //            Debug.Log(line);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("File don't exist");
+    //    }
+
+    //}
+
+    void ReadTextFile(string _filePath)
     {
-        TextAsset textFile = Resources.Load<TextAsset>("file");
-
-        if (textFile != null)
+        if (File.Exists(_filePath))
         {
-            _textLines = textFile.text.Split(new string[] {"\r\n", "\n"}, System.StringSplitOptions.RemoveEmptyEntries);
-
+            _textLines = File.ReadAllLines(_filePath);
             foreach (string line in _textLines)
             {
                 Debug.Log(line);
             }
         }
-        else
-        {
-            Debug.LogError("File don't exist");
-        }
-
     }
 
     public void Start()
     {
-        //string readFromFilePath = "Assets/Resources/file.txt";
-        ReadTextFile();
+        string readFromFilePath = Path.Combine(Application.streamingAssetsPath, "file.txt");
+        ReadTextFile(readFromFilePath);
         x = Random.Range(0, 8);
         y = Random.Range(0, 9);
         Calculate();
         
-
     }
 
     public void Update()
@@ -96,6 +107,7 @@ public class FileReader : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A))
         {
+            y--;
             if (y < minY)
             {
                 y = maxY;
@@ -104,12 +116,13 @@ public class FileReader : MonoBehaviour
             {
                 y = minY;
             }
-            y--;
+            
             Calculate();
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
+            y++;
             if (y < minY)
             {
                 y = maxY;
@@ -118,7 +131,7 @@ public class FileReader : MonoBehaviour
             {
                 y = minY;
             } 
-            y++;
+            
             Calculate();
         }
 
