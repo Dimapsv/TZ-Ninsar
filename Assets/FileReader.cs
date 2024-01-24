@@ -39,7 +39,7 @@ public class FileReader : MonoBehaviour
 
         if (textFile != null)
         {
-            _textLines = textFile.text.Split('\n');
+            _textLines = textFile.text.Split(new string[] {"\r\n", "\n"}, System.StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string line in _textLines)
             {
