@@ -16,7 +16,6 @@ public class MaterialTest : MonoBehaviour
         fl = FindObjectOfType<FileReader>();
         Renderer rend = GetComponent<Renderer>();
         rend.material = materials[0];
-        
     }
 
     private void Update()

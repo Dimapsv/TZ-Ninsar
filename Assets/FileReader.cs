@@ -5,34 +5,58 @@ using System.IO;
 
 public class FileReader : MonoBehaviour
 {
+    public string _loadedData;
+
     
-    public List<string> _textLines = new List<string>();
+
+    //public List<string> _textLines = new List<string>();
+    public string[] _textLines;
     public char[,] _data = new char[3,3];
     public int x = 0;
     public int y = 0;
 
-    private int maxX = 8;
-    private int maxY = 9;
-    private int minX = 0;
-    private int minY = 0;
+    public int maxX = 8;
+    public int maxY = 9;
+    public int minX = 0;
+    public int minY = 0;
 
-    void ReadTextFile(string _filePath)
+    //void ReadTextFile(string _filePath)
+    //{
+    //    StreamReader _inpStm = new StreamReader(_filePath);
+
+    //    while (!_inpStm.EndOfStream)
+    //    {
+    //        string _inpLn = _inpStm.ReadLine();
+    //        _textLines.Add(_inpLn);
+
+    //    }
+    //    _inpStm.Close();
+    //}
+
+    void ReadTextFile()
     {
-        StreamReader _inpStm = new StreamReader(_filePath);
+        TextAsset textFile = Resources.Load<TextAsset>("file");
 
-        while (!_inpStm.EndOfStream)
+        if (textFile != null)
         {
-            string _inpLn = _inpStm.ReadLine();
-            _textLines.Add(_inpLn);
-            
+            _textLines = textFile.text.Split('\n');
+
+            foreach (string line in _textLines)
+            {
+                Debug.Log(line);
+            }
         }
-        _inpStm.Close();
+        else
+        {
+            Debug.LogError("File don't exist");
+        }
+
     }
 
     public void Start()
     {
-        string readFromFilePath = Application.dataPath + "/" + "file" + ".txt";
-        ReadTextFile(readFromFilePath);
+        //string readFromFilePath = "Assets/Resources/file.txt";
+        ReadTextFile();
         x = Random.Range(0, 8);
         y = Random.Range(0, 9);
         Calculate();
@@ -93,7 +117,7 @@ public class FileReader : MonoBehaviour
             if (y > maxY)
             {
                 y = minY;
-            }
+            } 
             y++;
             Calculate();
         }
@@ -119,7 +143,7 @@ public class FileReader : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            if (currentIndexX >= _textLines.Count)
+            if (currentIndexX >= _textLines.Length)
             {
                 currentIndexX = 0;
             }
